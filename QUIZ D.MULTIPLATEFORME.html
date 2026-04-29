@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Développement Multiplateforme</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            font-size:22px;
+            font-family: Arial, sans-serif;
+            display:flex;
+            justify-content:center;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+        .container{
+            max-width:1000px;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 3px 15px rgba(0,0,0,0.2);
+            margin:20px auto;
+        }
+        h2{
+            text-align:center;
+            font-size:32px;
+            margin-bottom:20px;
+        }
+        h3{
+            text-align:left;
+            font-size:24px;
+            margin-top:25px;
+        }
+        table{
+            width:100%;
+            font-size:20px;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+        table, th, td{
+            border:1.5px solid #333 !important;
+        }
+        th{
+            background:#f0f0f0;
+        }
+        th, td{
+            padding:12px;
+            text-align:center;
+        }
+        textarea{
+            width:100%;
+            height:120px;
+            font-size:18px;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        }
+        .correct{
+            background:#c8f7c5 !important;
+        }
+        .wrong{
+            background:#f7c5c5 !important;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Quiz Développement Multiplateforme</h2>
+
+    <h3>Exercice 1</h3>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+        </tr>
+        <tr>
+            <td>Flutter utilise quel langage ?</td>
+            <td><input type="radio" name="q1" value="0">Java</td>
+            <td><input type="radio" name="q1" value="1">Dart</td>
+            <td><input type="radio" name="q1" value="2">Python</td>
+            <td><input type="radio" name="q1" value="3">PHP</td>
+        </tr>
+        <tr>
+            <td>React Native utilise ?</td>
+            <td><input type="radio" name="q2" value="0">JavaScript</td>
+            <td><input type="radio" name="q2" value="1">C++</td>
+            <td><input type="radio" name="q2" value="2">SQL</td>
+            <td><input type="radio" name="q2" value="3">Kotlin</td>
+        </tr>
+        <tr>
+            <td>APK est un fichier ?</td>
+            <td><input type="radio" name="q3" value="0">Android</td>
+            <td><input type="radio" name="q3" value="1">iOS</td>
+            <td><input type="radio" name="q3" value="2">Linux</td>
+            <td><input type="radio" name="q3" value="3">Mac</td>
+        </tr>
+    </table>
+
+    <h3>Exercice 2</h3>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>A</th>
+            <th>B</th>
+            <th>C</th>
+            <th>D</th>
+        </tr>
+        <tr>
+            <td>Widget dans Flutter ?</td>
+            <td><input type="radio" name="q4" value="0">Text</td>
+            <td><input type="radio" name="q4" value="1">print</td>
+            <td><input type="radio" name="q4" value="2">echo</td>
+            <td><input type="radio" name="q4" value="3">input</td>
+        </tr>
+        <tr>
+            <td>Extension fichier Dart ?</td>
+            <td><input type="radio" name="q5" value="0">.dart</td>
+            <td><input type="radio" name="q5" value="1">.java</td>
+            <td><input type="radio" name="q5" value="2">.py</td>
+            <td><input type="radio" name="q5" value="3">.html</td>
+        </tr>
+    </table>
+
+    <h3>Exercice 3 (Pratique)</h3>
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Réponse</th>
+        </tr>
+        <tr>
+            <td>Citer 2 frameworks multiplateformes</td>
+            <td><textarea id="q6"></textarea></td>
+        </tr>
+        <tr>
+            <td>Quel langage utilise Flutter ?</td>
+            <td><textarea id="q7"></textarea></td>
+        </tr>
+    </table>
+
+    <button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+    <h4 id="score" class="text-center mt-3"></h4>
+</div>
+
+<script>
+function check(){
+    let score=0;
+    const answers={
+        q1:"1",
+        q2:"0",
+        q3:"0",
+        q4:"0",
+        q5:"0"
+    };
+
+    for(let q in answers){
+        let radios=document.getElementsByName(q);
+        radios.forEach(r=>{
+            let td=r.parentElement;
+            td.classList.remove("correct","wrong");
+            if(r.checked){
+                if(r.value===answers[q]){
+                    td.classList.add("correct");
+                    score++;
+                }else{
+                    td.classList.add("wrong");
+                }
+            }
+        });
+    }
+
+    let q6=document.getElementById("q6").value.toLowerCase();
+    let q7=document.getElementById("q7").value.toLowerCase();
+
+    if(q6.includes("flutter") || q6.includes("react")){
+        score++;
+        document.getElementById("q6").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q6").style.background="#f7c5c5";
+    }
+
+    if(q7.includes("dart")){
+        score++;
+        document.getElementById("q7").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q7").style.background="#f7c5c5";
+    }
+
+    document.getElementById("score").innerText="Score : "+score+" / 7";
+}
+</script>
+</body>
+</html>
