@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Agile</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    font-size:22px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    max-width:1000px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+    margin:20px auto;
+}
+
+h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+h3{
+    font-size:24px;
+    margin-top:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:20px;
+    margin-top:10px;
+}
+
+table, th, td{
+    border:1.5px solid #333 !important;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    font-size:18px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.correct{
+    background:#c8f7c5 !important;
+}
+
+.wrong{
+    background:#f7c5c5 !important;
+}
+
+button{
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quiz Approche Agile</h2>
+
+<h3>Exercice 1 (QCM)</h3>
+
+<table>
+<tr>
+<th>Question</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+<tr>
+<td>Agile est une méthode :</td>
+<td><input type="radio" name="q0" value="0">rigide</td>
+<td><input type="radio" name="q0" value="1">flexible</td>
+<td><input type="radio" name="q0" value="2">hardware</td>
+<td><input type="radio" name="q0" value="3">mathématique</td>
+</tr>
+
+<tr>
+<td>Le sprint dans Scrum est :</td>
+<td><input type="radio" name="q1" value="0">une réunion</td>
+<td><input type="radio" name="q1" value="1">une base de données</td>
+<td><input type="radio" name="q1" value="2">une courte période de travail</td>
+<td><input type="radio" name="q1" value="3">un logiciel</td>
+</tr>
+
+<tr>
+<td>Le Scrum Master est responsable de :</td>
+<td><input type="radio" name="q2" value="0">coder</td>
+<td><input type="radio" name="q2" value="1">gérer l’équipe agile</td>
+<td><input type="radio" name="q2" value="2">tester uniquement</td>
+<td><input type="radio" name="q2" value="3">designer UI</td>
+</tr>
+
+<tr>
+<td>Le Product Backlog contient :</td>
+<td><input type="radio" name="q3" value="0">les tâches prioritaires</td>
+<td><input type="radio" name="q3" value="1">le code source</td>
+<td><input type="radio" name="q3" value="2">les tests seulement</td>
+<td><input type="radio" name="q3" value="3">les serveurs</td>
+</tr>
+
+<tr>
+<td>Agile favorise :</td>
+<td><input type="radio" name="q4" value="0">le changement</td>
+<td><input type="radio" name="q4" value="1">l’immobilité</td>
+<td><input type="radio" name="q4" value="2">la lenteur</td>
+<td><input type="radio" name="q4" value="3">la fermeture</td>
+</tr>
+</table>
+
+<h3>Exercice 2 (Pratique)</h3>
+
+<table>
+
+<tr>
+<th>Question</th>
+<th>Réponse</th>
+</tr>
+
+<tr>
+<td>Donner 2 avantages de la méthode Agile</td>
+<td><textarea id="q5"></textarea></td>
+</tr>
+
+<tr>
+<td>Expliquer en 1 phrase ce qu’est un sprint</td>
+<td><textarea id="q6"></textarea></td>
+</tr>
+
+</table>
+
+<button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+
+<h4 id="score" class="text-center mt-3"></h4>
+
+</div>
+
+<script>
+function check(){
+    let score=0;
+
+    const answers={
+        q0:"1",
+        q1:"2",
+        q2:"1",
+        q3:"0",
+        q4:"0"
+    };
+
+    for(let q in answers){
+        let radios=document.getElementsByName(q);
+
+        radios.forEach(r=>{
+            let td=r.parentElement;
+
+            td.classList.remove("correct","wrong");
+
+            if(r.checked){
+                if(r.value===answers[q]){
+                    td.classList.add("correct");
+                    score++;
+                }else{
+                    td.classList.add("wrong");
+                }
+            }
+        });
+    }
+
+    let q5=document.getElementById("q5").value.toLowerCase();
+    let q6=document.getElementById("q6").value.toLowerCase();
+
+    if(q5.includes("rapide") || q5.includes("flexible") || q5.includes("changement")){
+        score++;
+        document.getElementById("q5").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q5").style.background="#f7c5c5";
+    }
+
+    if(q6.includes("sprint")){
+        score++;
+        document.getElementById("q6").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q6").style.background="#f7c5c5";
+    }
+
+    document.getElementById("score").innerText =
+        "Score : " + score + " / 7";
+}
+</script>
+
+</body>
+</html>
