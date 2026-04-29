@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme d'apprentissage et d'interaction en programmation</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>   /*css*/
+        body {
+            background-color: #0F172A;  /*لون الخلفية*/
+        }
+        h1 {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;  /**/
+            background-color: #0F172A;    /*لون الخلفية*/
+            color: #fa9571;    /*لون الكتابة*/
+            text-align: center;   /*جعل الكتابة فالوسط*/
+            padding: 15px;       /**/
+            border-radius: 8px;    /**/
+        }
+        h3 {
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;  /**/
+            background-color: #0F172A;  /*لون الخلفية*/
+            color: #fa9571;     /*لون الكتابة*/
+            text-align: center;   /*جعل الكتابة فالوسط*/
+            padding: 15px;       /**/
+            border-radius: 8px;  /**/
+        }
+        h4 {
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;  /**/
+            background-color: #0F172A;   /*لون الخلفية*/
+            color: #fa9571;   /*لون الكتابة*/
+            padding: 15px;      /**/
+            border-radius: 8px;  /**/
+        }
+        .level-btn img {
+            width: 60px;    /**/
+            margin-right: 20px;  /**/
+        }
+        p{
+            color: #000000;  /*لون الكتابة*/
+            font-weight: bold;  /*خط عريض*/
+            font-size: 30px;   /*حجم الكتابة*/
+        }
+    </style>
+</head>
+<body>
+    <!--image de langage de programmation-->
+    <div class="container my-4">
+        <img 
+        src="langues.jpg"
+        width="200" 
+        height="150"
+        alt="Logo">
+        <h4>P.A.I.PR</h4> 
+    </div>
+    <!-- Text-->
+    <div class="container main-section mb-4">
+        <div class="row">
+            <div class="col">
+                <h1>Développez votre carrière</h1>
+                <h3>Quel est votre niveau de connaissance en développement digital ?</h3>
+            </div>
+        </div>
+    </div>
+    <!-- BOUTONS -->
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-12 col-md-4 mb-4">
+                <div class="dropdown w-100">
+                    <button class="btn btn-info btn-lg w-100 level-btn" type="button" data-bs-toggle="dropdown">
+                        <p>Débutant</p>
+                       <img src="https://funnel-images-cdn.codefinity.com/876ebfba081030a0ed5efe801008ce0ce19355aa.png" alt="">
+                   </button>
+                    <ul class="dropdown-menu w-100">
+                        <li><a class="dropdown-item option-item" data-value="1ére années" href="hiba.html">1ére années</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba1.html">2éme années option mobile</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba01.html">2éme années option full stack</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+                document.querySelectorAll(".option-item").forEach(function(item){
+                    item.addEventListener("click", function(){
+                        let value = this.getAttribute("data-value");
+                        if (value === "1ére années") {
+                            window.location.href = "hiba.html";
+                        }
+                        else if (value === "2éme années option mobile") {
+                            window.location.href = "hiba1.html";
+                        }
+                        else if (value === "2éme années option fullstack") {
+                            window.location.href = "hiba01.html";
+                        }
+                    });
+                });
+            </script>
+            <div class="col-12 col-md-4 mb-4">
+                <div class="dropdown w-100">
+                    <button class="btn btn-info btn-lg w-100 level-btn" type="button" data-bs-toggle="dropdown">
+                        <p>intermédiaire</p>
+                       <img src="https://funnel-images-cdn.codefinity.com/876ebfba081030a0ed5efe801008ce0ce19355aa.png" alt="">
+                   </button>
+                    <ul class="dropdown-menu w-100">
+                        <li><a class="dropdown-item option-item" data-value="1ére années" href="hiba.html">1ére années</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba1.html">2éme années option mobile</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba01.html">2éme années option full stack</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+                document.querySelectorAll(".option-item").forEach(function(item){
+                    item.addEventListener("click", function(){
+                        let value = this.getAttribute("data-value");
+                        if (value === "1ére années") {
+                            window.location.href = "hiba.html";
+                        }
+                        else if (value === "2éme années option mobile") {
+                            window.location.href = "hiba01.html";
+                        }
+                        else if (value === "2éme années option fullstack") {
+                            window.location.href = "hiba01.html";
+                        }
+                    });
+                });
+            </script>
+            <div class="col-12 col-md-4 mb-4">
+                <div class="dropdown w-100">
+                    <button class="btn btn-info btn-lg w-100 level-btn" type="button" data-bs-toggle="dropdown">
+                        <p>Avancé</p>
+                       <img src="https://funnel-images-cdn.codefinity.com/876ebfba081030a0ed5efe801008ce0ce19355aa.png" alt="">
+                   </button>
+                    <ul class="dropdown-menu w-100">
+                        <li><a class="dropdown-item option-item" data-value="1ére années" href="hiba.html">1ére années</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba1.html">2éme années option mobile</a></li>
+                        <li><a class="dropdown-item option-item" data-value="2éme années" href="hiba01.html">2éme années option full stack</a></li>
+                    </ul>
+                </div>
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
+                document.querySelectorAll(".option-item").forEach(function(item){
+                    item.addEventListener("click", function(){
+                        let value = this.getAttribute("data-value");
+                        if (value === "1ére années") {
+                            window.location.href = "hiba.html";
+                        }
+                        else if (value === "2éme années option web full stack") {
+                            window.location.href = "hiba1.html";
+                        }
+                        else if (value === "2éme années option mobile") {
+                            window.location.href = "hiba01.html";
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</body>
+</html>
