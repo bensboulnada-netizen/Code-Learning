@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Cloud Native</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    font-size:22px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    max-width:1000px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+    margin:20px auto;
+}
+
+h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+h3{
+    font-size:24px;
+    margin-top:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:20px;
+    margin-top:10px;
+}
+
+table, th, td{
+    border:1.5px solid #333 !important;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    font-size:18px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.correct{
+    background:#c8f7c5 !important;
+}
+
+.wrong{
+    background:#f7c5c5 !important;
+}
+
+button{
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quiz Cloud Native Application</h2>
+
+<h3>Exercice 1 (QCM)</h3>
+
+<table>
+<tr>
+<th>Question</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+<tr>
+<td>Cloud Native signifie :</td>
+<td><input type="radio" name="q0" value="0">application desktop</td>
+<td><input type="radio" name="q0" value="1">application conçue pour le cloud</td>
+<td><input type="radio" name="q0" value="2">site HTML simple</td>
+<td><input type="radio" name="q0" value="3">logiciel offline</td>
+</tr>
+
+<tr>
+<td>Docker sert à :</td>
+<td><input type="radio" name="q1" value="0">designer UI</td>
+<td><input type="radio" name="q1" value="1">créer des conteneurs</td>
+<td><input type="radio" name="q1" value="2">écrire du HTML</td>
+<td><input type="radio" name="q1" value="3">faire du CSS</td>
+</tr>
+
+<tr>
+<td>Kubernetes sert à :</td>
+<td><input type="radio" name="q2" value="0">gérer conteneurs</td>
+<td><input type="radio" name="q2" value="1">créer images</td>
+<td><input type="radio" name="q2" value="2">compiler code</td>
+<td><input type="radio" name="q2" value="3">dessiner pages</td>
+</tr>
+
+<tr>
+<td>Microservices sont :</td>
+<td><input type="radio" name="q3" value="0">une seule application</td>
+<td><input type="radio" name="q3" value="1">services indépendants</td>
+<td><input type="radio" name="q3" value="2">fichiers CSS</td>
+<td><input type="radio" name="q3" value="3">bases de données</td>
+</tr>
+
+<tr>
+<td>Cloud computing permet :</td>
+<td><input type="radio" name="q4" value="0">stockage local uniquement</td>
+<td><input type="radio" name="q4" value="1">accès via internet</td>
+<td><input type="radio" name="q4" value="2">pas de serveur</td>
+<td><input type="radio" name="q4" value="3">pas de données</td>
+</tr>
+</table>
+
+<h3>Exercice 2 (Pratique)</h3>
+
+<table>
+
+<tr>
+<th>Question</th>
+<th>Réponse</th>
+</tr>
+
+<tr>
+<td>Citer 2 outils Cloud Native (ex: Docker, Kubernetes)</td>
+<td><textarea id="q5"></textarea></td>
+</tr>
+
+<tr>
+<td>Expliquer en 1 phrase ce qu’est une application cloud native</td>
+<td><textarea id="q6"></textarea></td>
+</tr>
+
+</table>
+
+<button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+
+<h4 id="score" class="text-center mt-3"></h4>
+
+</div>
+
+<script>
+function check(){
+    let score=0;
+
+    const answers={
+        q0:"1",
+        q1:"1",
+        q2:"0",
+        q3:"1",
+        q4:"1"
+    };
+
+    for(let q in answers){
+        let radios=document.getElementsByName(q);
+
+        radios.forEach(r=>{
+            let td=r.parentElement;
+
+            td.classList.remove("correct","wrong");
+
+            if(r.checked){
+                if(r.value===answers[q]){
+                    td.classList.add("correct");
+                    score++;
+                }else{
+                    td.classList.add("wrong");
+                }
+            }
+        });
+    }
+
+    let q5=document.getElementById("q5").value.toLowerCase();
+    let q6=document.getElementById("q6").value.toLowerCase();
+
+    if(q5.includes("docker") || q5.includes("kubernetes") || q5.includes("cloud")){
+        score++;
+        document.getElementById("q5").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q5").style.background="#f7c5c5";
+    }
+
+    if(q6.includes("cloud") && q6.includes("application")){
+        score++;
+        document.getElementById("q6").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q6").style.background="#f7c5c5";
+    }
+
+    document.getElementById("score").innerText =
+        "Score : " + score + " / 7";
+}
+</script>
+
+</body>
+</html>
