@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Memory Game 🧠</title>
+
+<style>
+  body {
+    margin:0;
+    padding:0;
+    font-family: Arial, sans-serif;
+    color: #0f0;
+    background:black;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    text-align:center;
+  }
+
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+  }
+  h1{
+    font-size:40px;
+    margin-top:20px;
+    color:white;
+    position:relative;
+    z-index:1;
+  }
+
+  .top{
+    margin-top:10px;
+    font-size:25px;
+    font-weight: bold;
+    color:white;
+    position:relative;
+    z-index:1;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4,110px); 
+    gap:15px; 
+    justify-content:center;
+    margin-top:25px;
+    position:relative;
+    z-index:1;
+  }
+
+  .card{
+    width:110px;   
+    height:110px;  
+    background:#848282;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    font-size:32px; 
+    color:white;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .card.open{
+    background:white;
+    color:black;
+    transform: scale(1.1);
+  }
+
+  button{
+    margin:5px;
+    padding:8px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:15px;
+    background:#565656;
+    color:white;
+    position:relative;
+    z-index:1;
+  }
+
+  button:hover{
+    background:#333;
+  }
+
+  #msg{
+    margin-top:15px;
+    font-size:25px;
+    color:white;
+    position:relative;
+    z-index:1;
+  }
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<h1>🧠 MEMORY GAME</h1>
+
+<div class="top">
+  ⏱ Time: <span id="time">20</span> | 🎯 Attempts: <span id="tries">5</span>
+</div>
+
+<div>
+  <button onclick="restart()">🔄 Restart</button>
+  <button onclick="goBack()">⬅️ Back</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<p id="msg"></p>
+
+<script>
+
+let canvas = document.getElementById("matrix");
+let ctx = canvas.getContext("2d");
+
+let fontSize = 16;
+let columns;
+let drops;
+
+function setupMatrix(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  columns = canvas.width / fontSize;
+  drops = [];
+
+  for (let i = 0; i < columns; i++) {
+    drops[i] = 1;
+  }
+}
+
+setupMatrix();
+
+function drawMatrix() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.fillStyle = "#00ff00";
+  ctx.font = fontSize + "px monospace";
+
+  for (let i = 0; i < drops.length; i++) {
+    let text = Math.random() > 0.5 ? "1" : "0";
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+
+setInterval(drawMatrix, 50);
+
+/* ================= GAME ================= */
+
+let sets = [
+  ["📱","📱","🤖","🤖","APK","APK","XML","XML"],
+  ["Kotlin","Kotlin","Java","Java","UI","UI","UX","UX"],
+  ["Android","Android","Studio","Studio","DB","DB","⚙️","⚙️"],
+  ["Intent","Intent","Button","Button","Text","Text","Code","Code"]
+];
+
+let grid = document.getElementById("grid");
+let first, second, lock;
+let matched;
+let time;
+let timer;
+let tries = 5;
+
+function init(){
+  grid.innerHTML="";
+  first=null;
+  second=null;
+  lock=false;
+  matched=0;
+  time=20;
+
+  document.getElementById("time").innerText=time;
+  document.getElementById("tries").innerText=tries;
+  document.getElementById("msg").innerText="";
+
+  let symbols = [...sets[Math.floor(Math.random()*sets.length)]];
+  symbols.sort(()=>0.5 - Math.random());
+
+  symbols.forEach(sym=>{
+    let card=document.createElement("div");
+    card.className="card";
+    card.innerText="?";
+
+    card.onclick=function(){
+      if(lock || card.classList.contains("open") || time<=0) return;
+
+      card.innerText=sym;
+      card.classList.add("open");
+
+      if(!first){
+        first=card;
+      }else{
+        second=card;
+        lock=true;
+
+        if(first.innerText===second.innerText){
+          matched++;
+          first=null;
+          second=null;
+          lock=false;
+
+          if(matched===symbols.length/2){
+            clearInterval(timer);
+            document.getElementById("msg").innerText="🔥 Bravo! You won!";
+          }
+        }else{
+          setTimeout(()=>{
+            first.innerText="?";
+            second.innerText="?";
+            first.classList.remove("open");
+            second.classList.remove("open");
+            first=null;
+            second=null;
+            lock=false;
+          },700);
+        }
+      }
+    };
+
+    grid.appendChild(card);
+  });
+
+  clearInterval(timer);
+  timer=setInterval(()=>{
+    time--;
+    document.getElementById("time").innerText=time;
+
+    if(time<=0){
+      clearInterval(timer);
+      tries--;
+      document.getElementById("tries").innerText=tries;
+
+      if(tries<=0){
+        document.getElementById("msg").innerText="😢 Game Over!";
+      }else{
+        document.getElementById("msg").innerText="⏰ Time Up!";
+        setTimeout(init,1500);
+      }
+    }
+  },1000);
+}
+
+function restart(){
+  tries=5;
+  init();
+}
+
+function goBack(){
+  window.location.href="HB1.html";
+}
+
+window.addEventListener("resize", setupMatrix);
+
+init();
+
+</script>
+
+</body>
+</html>
