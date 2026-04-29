@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Quiz Backend & DB</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    font-size:22px;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    max-width:1000px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+    margin:20px auto;
+}
+
+h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+h3{
+    font-size:24px;
+    margin-top:25px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:20px;
+    margin-top:10px;
+}
+
+table, th, td{
+    border:1.5px solid #333 !important;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+}
+
+textarea{
+    width:100%;
+    height:120px;
+    font-size:18px;
+    padding:10px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.correct{
+    background:#c8f7c5 !important;
+}
+
+.wrong{
+    background:#f7c5c5 !important;
+}
+
+button{
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quiz Backend</h2>
+
+<h3>Exercice 1 (QCM)</h3>
+
+<table>
+<tr>
+<th>Question</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+<tr>
+<td>Backend signifie :</td>
+<td><input type="radio" name="q0" value="0">partie visible du site</td>
+<td><input type="radio" name="q0" value="1">partie serveur</td>
+<td><input type="radio" name="q0" value="2">design UI</td>
+<td><input type="radio" name="q0" value="3">navigateur</td>
+</tr>
+
+<tr>
+<td>Langage backend :</td>
+<td><input type="radio" name="q1" value="0">HTML</td>
+<td><input type="radio" name="q1" value="1">CSS</td>
+<td><input type="radio" name="q1" value="2">PHP</td>
+<td><input type="radio" name="q1" value="3">Bootstrap</td>
+</tr>
+
+<tr>
+<td>Base de données sert à :</td>
+<td><input type="radio" name="q2" value="0">afficher pages</td>
+<td><input type="radio" name="q2" value="1">stocker données</td>
+<td><input type="radio" name="q2" value="2">dessiner interface</td>
+<td><input type="radio" name="q2" value="3">compiler code</td>
+</tr>
+
+<tr>
+<td>Serveur web exemple :</td>
+<td><input type="radio" name="q3" value="0">Apache</td>
+<td><input type="radio" name="q3" value="1">Photoshop</td>
+<td><input type="radio" name="q3" value="2">Excel</td>
+<td><input type="radio" name="q3" value="3">Word</td>
+</tr>
+
+<tr>
+<td>Requête pour récupérer données :</td>
+<td><input type="radio" name="q4" value="0">INSERT</td>
+<td><input type="radio" name="q4" value="1">SELECT</td>
+<td><input type="radio" name="q4" value="2">DELETE</td>
+<td><input type="radio" name="q4" value="3">UPDATE</td>
+</tr>
+</table>
+
+<h3>Exercice 2 (Pratique)</h3>
+
+<table>
+
+<tr>
+<th>Question</th>
+<th>Réponse</th>
+</tr>
+
+<tr>
+<td>Créer une API simple en backend (ex: PHP ou Node.js)</td>
+<td><textarea id="q5"></textarea></td>
+</tr>
+
+<tr>
+<td>Écrire une requête SQL SELECT utilisateurs</td>
+<td><textarea id="q6"></textarea></td>
+</tr>
+
+</table>
+
+<button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+
+<h4 id="score" class="text-center mt-3"></h4>
+
+</div>
+
+<script>
+function check(){
+    let score=0;
+
+    const answers={
+        q0:"1",
+        q1:"2",
+        q2:"1",
+        q3:"0",
+        q4:"1"
+    };
+
+    for(let q in answers){
+        let radios=document.getElementsByName(q);
+
+        radios.forEach(r=>{
+            let td=r.parentElement;
+
+            td.classList.remove("correct","wrong");
+
+            if(r.checked){
+                if(r.value===answers[q]){
+                    td.classList.add("correct");
+                    score++;
+                }else{
+                    td.classList.add("wrong");
+                }
+            }
+        });
+    }
+
+    let q5=document.getElementById("q5").value.toLowerCase();
+    let q6=document.getElementById("q6").value.toLowerCase();
+
+    if(q5.includes("api") || q5.includes("server") || q5.includes("php") || q5.includes("node")){
+        score++;
+        document.getElementById("q5").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q5").style.background="#f7c5c5";
+    }
+
+    if(q6.includes("select")){
+        score++;
+        document.getElementById("q6").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q6").style.background="#f7c5c5";
+    }
+
+    document.getElementById("score").innerText =
+        "Score : " + score + " / 7";
+}
+</script>
+
+</body>
+</html>
