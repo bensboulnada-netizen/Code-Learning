@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Spécialisée - Cours de Programmation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }       
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #d794ec 0%, #76a0e8 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }       
+        .chat-container {
+            width: 650px;
+            height: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }       
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }        
+        .chat-header {
+            background: linear-gradient(135deg, #344ac6 0%, #ea65ea 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }       
+        .chat-header h1 {
+            margin: 0;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }       
+        .chat-header p {
+            margin: 8px 0 0;
+            font-size: 0.85em;
+            opacity: 0.9;
+        }        
+        .badge {
+            display: inline-block;
+            background: #ff6b6b;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 9px;
+        }       
+        .chat-messages {
+            height: 480px;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }   
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            animation: slideIn 0.3s ease;
+        }  
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        } 
+        .user-message {
+            justify-content: flex-end;
+        }  
+        .bot-message {
+            justify-content: flex-start;
+        }
+        .message-content {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 17px;
+            line-height: 1.4;
+        }
+        .user-message .message-content {
+            background: #2a5298;
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+        .bot-message .message-content {
+            background: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .error-message .message-content {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffecb5;
+            border-left: 4px solid #ffc107;
+        }
+       .chat-input {
+            display: flex;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            gap: 10px;
+        }  
+        .chat-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+            transition: all 0.3s;
+        }  
+        .chat-input input:focus {
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }   
+        .chat-input button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }  
+        .chat-input button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }  
+        .chat-input button:active {
+            transform: translateY(0);
+        }  
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 12px 20px;
+            background: #a9cdf0;
+            border-top: 1px solid #e0e0e0;
+            font-size: 17px;
+            color: #666;
+        }   
+        .topics span {
+            background: #e9ecef;
+            padding: 4px 10px;
+            border-radius: 15px;
+        } 
+        ::-webkit-scrollbar {
+            width: 8px;
+        }    
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }   
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }  
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>
+                📚 IA Spécialisée
+                <span style="font-size: 0.7em;">v1.0</span>
+            </h1>
+            <p>Je ne réponds qu'aux questions sur la PROGRAMMATION</p>
+            <div class="badge">🔒 Mode cours uniquement</div>
+        </div>  
+        <div class="chat-messages" id="chatMessages">
+            <div class="message bot-message">
+                <div class="message-content">
+                    👋 <strong>Bonjour !</strong><br><br>
+                    Je suis une IA spécialisée dans les <strong>cours de programmation</strong>.<br><br>
+                    📌 <strong>Je ne réponds Qu'aux questions sur :</strong><br>
+                    • HTML / CSS / JavaScript<br>
+                    • Python / Java / C++ <br>
+                    • PHP / BASE DE DONNEES /  <br>
+                    • Algorithmes et logique<br>
+                    • Développement web et mobile<br><br>
+                    ⚠️ <strong>Si vous me parlez d'autre chose, je ne répondrai pas !</strong><br><br>
+                    Alors, quelle question de programmation avez-vous ?
+                </div>
+            </div>
+        </div>   
+        <div class="topics">
+            📖 Sujets autorisés : HTML • CSS • JavaScript • Python • Java • Algorithmes • Web • etc....
+        </div>   
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Pose une question sur la programmation..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+    <script>
+        const motsClesProgrammation = [
+            "html", "css", "javascript", "js", "java", "php", "python", "java", "c+", "c#", "ruby", "swift",
+            "programmation", "code", "coder", "algorithme", "variable", "fonction", "boucle", "if", "else",
+            "tableau", "array", "objet", "classe", "héritage", "polymorphisme", "framework", "react",
+            "angular", "vue", "node", "express", "mysql", "mongodb", "sql", "base de donnees", "api",
+            "frontend", "backend", "fullstack", "développement", "développeur", "site web", "application",
+            "balise", "style", "script", "attribut", "selecteur", "flexbox", "grid", "responsive",
+            "git", "github", "déboguer", "debug", "compiler", "interpréter", "langage", "booleen",
+            "bootstrap"
+        ];
+        const connaissancesProgrammation = {
+            // HTML/CSS
+            "html": "HTML (HyperText Markup Language) est le langage de structure des pages web. Il utilise des balises comme 'html', 'head', 'body', 'h1', 'p', etc.",
+            "css": "CSS (Cascading Style Sheets) est le langage qui permet de styliser les pages web : couleurs, polices, mise en page, animations.",
+            "javascript": "JavaScript est le langage de programmation qui rend les sites web interactifs. Il permet de manipuler le DOM, gérer des événements, faire des requêtes API.",
+            "java": "JavaScript est le langage de programmation qui rend les sites web interactifs. Il permet de manipuler le DOM, gérer des événements, faire des requêtes API.",
+            "flexbox": " Flexbox est un modèle de mise en page CSS qui permet d'aligner et distribuer facilement des éléments dans un conteneur.",
+            "grid": "CSS Grid est un système de mise en page puissant qui permet de créer des grilles complexes en 2 dimensions.",
+            "python": "PYTHON est un langage de programmation facile a apprendre, qui se lit presque comme l'anglais. Il permet des ordres pour l'ordinateur avec des mots simples 'comme print, if, while' au lieu de symbole complet.",
+            "php": "PHP st un langage de programmation specialement conçue pour creer des sites web dynamiques et interactives.","grid": "CSS Grid est un système de mise en page puissant qui permet de créer des grilles complexes en 2 dimensions.",
+            "bootstrap": "BOOTSTRAP est une biblioteque gratuite de composants prets a l'emploi pour creer rapidement des sites web jolis et adaptes aux mobiles.",
+            "c+": "c+ est un langage de programmation imperative,structure et de base niveau, conçu pour offrir un compromis unique entre entre l'expressivite d'un langage de haut niveau et le controle fin de ressources materielles offert par l'assembleur.",
+            "base de donnees": "BASE DE DONNEES est une classeur electonique geant qui permet de stocker, organiser et se retrouver rapidemet des informations.",
+            "booleen": "BOOLEEN est un type de donnees qui ne peyt prendre que deux valeurs:vraie ou faux.",
+            // Général
+            "variable": "Une variable est un espace mémoire qui stocke une valeur. En JS : let nom = 'valeur'; En Python : nom = 'valeur'",
+            "fonction": "Une fonction est un bloc de code réutilisable qui exécute une tâche spécifique. Ex: function direBonjour() { console.log('Bonjour'); }",
+            "boucle": "Les boucles permettent de répéter des instructions. for (let i = 0; i < 10; i++) { } ou while(condition) { }",
+            "tableau": "Un tableau (array) est une structure de données qui stocke une liste d'éléments. Ex: let fruits = ['pomme', 'banane', 'orange'];",
+            "objet": "Un objet est une structure qui regroupe des propriétés et des méthodes. Ex: let voiture = { marque: 'Toyota', couleur: 'rouge' };",
+            // Algorithmes
+            "algorithme": "Un algorithme est une suite d'étapes logiques pour résoudre un problème. C'est la base de la programmation.",
+            "if else": "La condition if/else permet d'exécuter du code selon une condition. if (age >= 18) { majeur(); } else { mineur(); }",
+            // Outils
+            "git": "Git est un système de contrôle de version qui permet de suivre les modifications du code et de collaborer en équipe.",
+            "github": "GitHub est une plateforme qui héberge des projets Git, permet le travail collaboratif et le partage de code.",
+            // Défaut
+            "default": "Je suis spécialisé en programmation. Pour cette question, je vous conseille de consulter votre cours ou de reformuler en termes techniques."
+        };
+        //=========== des exercices =======
+        function estUnSujetDeProgrammation(message) {
+            let messageClean = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            // Vérifier si le message contient un mot-clé de programmation
+            for (let mot of motsClesProgrammation) {
+                if (messageClean.includes(mot)) {
+                    return true;
+                }
+            }
+            return false;
+        }    
+        function getReponseProgrammation(message) {
+            let messageClean = message.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");           
+            // Chercher une correspondance dans les connaissances
+            for (let [motCle, reponse] of Object.entries(connaissancesProgrammation)) {
+                if (messageClean.includes(motCle)) {
+                    return reponse;
+                }
+            }           
+            return connaissancesProgrammation["default"];
+        }       
+        function getReponseErreur() {
+            const erreurs = [
+                "❌ **ERREUR** : Je suis une IA spécialisée en programmation. Je ne réponds qu'aux questions techniques sur le code.\n\n📌 Posez-moi une question sur : HTML, CSS, JavaScript, Python, Java, algorithmes, etc.",
+                "⚠️ **HORS SUJET** : Mon rôle est de vous aider avec les cours de programmation uniquement.\n\n💡 Essayez de me demander quelque chose comme : 'C'est quoi une variable ?' ou 'Comment faire une boucle ?'",
+                "🚫 **DÉSOLÉ** : Je ne peux pas répondre à cela. Je suis conçu exclusivement pour parler de programmation.\n\n🎯 Posez une question technique sur le développement web, les langages ou les algorithmes.",
+                "📚 **RAPPEL** : Je suis votre assistant en programmation. Pour toute question non technique, je ne peux pas vous aider.\n\n✅ Exemples valides : 'C'est quoi HTML ?', 'Comment créer une fonction ?', 'Explique-moi les boucles'"
+            ];
+            return erreurs[Math.floor(Math.random() * erreurs.length)];
+        }       
+        function addMessage(message, isUser, isError = false) {
+            const chatMessages = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = isUser ? 'message user-message' : 'message bot-message';
+            if (isError && !isUser) {
+                messageDiv.className = 'message bot-message error-message';
+            }           
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerHTML = message.replace(/\n/g, '<br>');           
+            messageDiv.appendChild(contentDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }      
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const userMessage = input.value.trim();           
+            if (userMessage === "") return;           
+            // Afficher le message de l'utilisateur
+            addMessage(userMessage, true);           
+            // Vérifier si c'est un sujet de programmation
+            if (estUnSujetDeProgrammation(userMessage)) {
+                // Réponse spécialisée programmation
+                const reponse = getReponseProgrammation(userMessage);
+                addMessage(reponse, false, false);
+            } else {
+                // Réponse d'erreur - l'utilisateur parle d'autre chose
+                const erreur = getReponseErreur();
+                addMessage(erreur, false, true);
+            }
+            // Effacer l'input
+            input.value = "";
+        }
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+    </script>
+</body>
+</html>
