@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Learning</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        body{
+            background: rgb(255, 255, 255);
+        }
+        .demo {
+            overflow : hidden;
+            background-color : rgb(134, 133, 133);
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .demo a {
+            float : left;
+            display : block;
+            color : rgb(245, 245, 220);
+            text-align : center;
+            padding : 10px 20px;
+            text-decoration : none;
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .paragraphe img,
+        .paragraphe2 img,
+        .paragraphe3 img {
+            width: 350px;
+        }
+        @media screen and (max-width : 600px) {
+            .demo a {
+                float : none;
+                width : 100%
+            }
+        }
+        .ai{      /* غادي نطبّق عليه هاد الستايل chat-btn سميتوclass أي عنصر عندو */
+           position:fixed;   /*العنصر كيبقى لاصق فالشاشة حتى إلا طلعات ولا هبطات الصفحة، ما كيتحركش*/
+           bottom:20px;      /*كخلي العنصر من لتحت ديال الشاشة */
+           right:20px;      /*كخلي العنصر على اليمين ديال الشاشة */
+           color:white;    /*لون الإيموجي*/
+           font-size:10px;   /*حجم الإيموجي*/
+           border-radius:50%; /*حجم الإيموجي*/
+           text-decoration:none;  /*حجم الإيموجي*/
+           box-shadow:0 0 10px rgba(0,0,0,0.3); /*حجم الإيموجي*/
+           z-index:999;   /**/
+        }
+        .ai{
+            height: 110px;
+            width: 180px;
+        }
+        .paragraphe, .paragraphe2, .paragraphe3{
+           display: flex;
+           align-items: center;  
+           gap: 20px;             
+           margin: 30px;
+           font-style: unset;
+        }
+        .paragraphe img,
+        .paragraphe2 img,
+        .paragraphe3 img{
+            width: 360px;
+        }
+        @media (max-width: 768px){
+            .paragraphe,
+            .paragraphe2,
+            .paragraphe3{
+                flex-direction: column;
+                text-align: center;
+            }
+            .paragraphe img,
+            .paragraphe2 img,
+            .paragraphe3 img{
+                width: 90%;
+            }
+        }
+        h4 {
+            font-size: 22px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        h2 {
+            font-size: 40px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        h3 {
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+        .p {
+            font-style: initial;
+            font-size: 22px;
+        }
+    </style>
+</head>
+<body>
+    <!-- MENU -->
+    <div class="demo">
+        <a href="HB1.html">Acceuil</a>
+        <a href="HB2.html">D.Android</a>
+        <a href="HB3.html">Programmation Kotlin</a>
+        <a href="HB4.html">Gestion de projet</a>
+        <a href="HB5.html">D.Multiplateforme</a>
+        <a href="HB6.html">Interfaces Android</a>
+        <a href="memory games1.html">Memory Games</a>
+    </div>
+    <a href="ai.html"><img src="ai.jpg" class="ai" alt=""></a>
+    <!-- INTRO -->
+    <div class="container mt-4">
+        <h2>📚 Plateforme de Développement Digital:</h2>
+        <p class="p">
+            Ce site est destiné aux étudiants de 1ère et 2ème année en développement digital.
+            Il contient des modules importants pour apprendre la programmation et créer des projets réels.
+        </p>
+    </div>
+    <!-- MODULES 2ème année -->
+    <div class="container mt-4">
+        <h3>📚 Modules 2ème année option mobile.</h3>
+    </div>
+    <div class="paragraphe">
+        <img src="image de developpement android.avif">
+        <h4>Développement Android pour créer des applications mobiles.</h4>
+    </div>
+    <div class="paragraphe">
+        <img src="image de kotlin.webp">
+        <h4>Kotlin est utilisé pour développer des applications Android modernes.</h4>
+    </div>
+    <div class="paragraphe2">
+        <img src="image de gestion de projet.png">
+        <h4>Gestion de projet pour organiser et réussir un projet informatique.</h4>
+    </div>
+    <div class="paragraphe2">
+        <img src="image de developpement multiplateforme.jpg">
+        <h4>Développement multiplateforme pour créer des apps sur plusieurs systèmes.</h4>
+    </div>
+    <div class="paragraphe3">
+        <img src="image de l'interface.avif">
+        <h4>Interfaces utilisateurs pour améliorer le design des applications.</h4>
+    </div>
+<!-- 1ère année -->
+    <div class="container mt-4">
+        <h3>📘 Notions 1ère année</h3>
+        <p class="p">
+            HTML, CSS, algorithmique et logique de programmation pour bien débuter.
+        </p>
+    </div>
+<!-- OBJECTIF -->
+    <div class="container mt-4">
+        <h3>🎯 Objectif</h3>
+        <p class="p">
+            Aider les jeunes à comprendre les cours et développer leurs compétences pratiques.
+        </p>
+    </div>
+    <!-- CTA -->
+    <div class="container mt-4 mb-5">
+        <h3>🚀 Commencez maintenant</h3>
+        <p class="p">
+            Choisissez un module dans le menu et commencez votre apprentissage 👆
+        </p>
+    </div>
+<!-- FOOTER -->
+    <div style="background: black;">
+        <div class="row text-center text-white">
+            <div class="col p-4">
+                <h5>Développement Digital</h5>
+                <h5>© 2026</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
