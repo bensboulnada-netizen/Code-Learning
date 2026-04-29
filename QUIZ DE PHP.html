@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Quiz PHP</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+body{
+    font-size:22px;
+    background: linear-gradient(135deg, #74ebd5, #acb6e5);
+    font-family: Arial, sans-serif;
+    display:flex;
+    justify-content:center;
+}
+
+.container{
+    max-width:1000px;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 3px 15px rgba(0,0,0,0.2);
+    margin:20px auto;
+}
+
+h2{
+    text-align:center;
+    font-size:32px;
+    margin-bottom:20px;
+}
+
+h3{
+    text-align:left;
+    font-size:24px;
+    margin-top:25px;
+}
+
+table{
+    width:100%;
+    font-size:20px;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+table, th, td{
+    border:1.5px solid #333 !important;
+}
+
+th{
+    background:#f0f0f0;
+}
+
+th, td{
+    padding:12px;
+    text-align:center;
+}
+
+.correct{
+    background:#c8f7c5 !important;
+}
+
+.wrong{
+    background:#f7c5c5 !important;
+}
+
+button{
+    font-size:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Quiz PHP</h2>
+
+<h3>Exercice 1</h3>
+
+<table>
+<tr>
+<th>Question</th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+</tr>
+
+<tr>
+<td>Fusionner des tableaux</td>
+<td><input type="radio" name="q0" value="0">merge()</td>
+<td><input type="radio" name="q0" value="1">array_merge()</td>
+<td><input type="radio" name="q0" value="2">combine()</td>
+<td><input type="radio" name="q0" value="3">array_combine()</td>
+</tr>
+
+<tr>
+<td>Supprimer élément par clé</td>
+<td><input type="radio" name="q1" value="0">remove()</td>
+<td><input type="radio" name="q1" value="1">unset()</td>
+<td><input type="radio" name="q1" value="2">delete()</td>
+<td><input type="radio" name="q1" value="3">array_remove()</td>
+</tr>
+
+<tr>
+<td>Nombre aléatoire</td>
+<td><input type="radio" name="q2" value="0">rand()</td>
+<td><input type="radio" name="q2" value="1">random()</td>
+<td><input type="radio" name="q2" value="2">mt_rand()</td>
+<td><input type="radio" name="q2" value="3">random_int()</td>
+</tr>
+
+<tr>
+<td>Commence par une chaîne (PHP 8+)</td>
+<td><input type="radio" name="q3" value="0">str_starts_with()</td>
+<td><input type="radio" name="q3" value="1">starts_with()</td>
+<td><input type="radio" name="q3" value="2">substr()</td>
+<td><input type="radio" name="q3" value="3">strpos()</td>
+</tr>
+
+<tr>
+<td>Formater une date</td>
+<td><input type="radio" name="q4" value="0">date_format()</td>
+<td><input type="radio" name="q4" value="1">format_date()</td>
+<td><input type="radio" name="q4" value="2">date()</td>
+<td><input type="radio" name="q4" value="3">strftime()</td>
+</tr>
+</table>
+
+<h3>Exercice 2 (Pratique)</h3>
+
+<table>
+
+<tr>
+<th>Question</th>
+<th>Réponse</th>
+</tr>
+
+<tr>
+<td>
+Écrire un code PHP pour afficher la date actuelle
+</td>
+<td>
+<textarea id="q5"></textarea>
+</td>
+</tr>
+
+<tr>
+<td>
+Écrire une boucle qui affiche 0 à 2 en PHP
+</td>
+<td>
+<textarea id="q6"></textarea>
+</td>
+</tr>
+
+</table>
+
+<button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+
+<h4 id="score" class="text-center mt-3"></h4>
+
+</div>
+
+<script>
+function check(){
+    let score=0;
+
+    const answers={
+        q0:"1",
+        q1:"1",
+        q2:"0",
+        q3:"0",
+        q4:"2"
+    };
+
+    for(let q in answers){
+        let radios=document.getElementsByName(q);
+
+        radios.forEach(r=>{
+            let td=r.parentElement;
+
+            td.classList.remove("correct","wrong");
+
+            if(r.checked){
+                if(r.value===answers[q]){
+                    td.classList.add("correct");
+                    score++;
+                }else{
+                    td.classList.add("wrong");
+                }
+            }
+        });
+    }
+
+    let q5=document.getElementById("q5").value.toLowerCase();
+    let q6=document.getElementById("q6").value.toLowerCase();
+
+    if(q5.includes("date")){
+        score++;
+        document.getElementById("q5").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q5").style.background="#f7c5c5";
+    }
+
+    if(q6.includes("for") && q6.includes("0") && q6.includes("2")){
+        score++;
+        document.getElementById("q6").style.background="#c8f7c5";
+    }else{
+        document.getElementById("q6").style.background="#f7c5c5";
+    }
+
+    document.getElementById("score").innerText =
+        "Score : " + score + " / 7";
+}
+</script>
+
+</body>
+</html>
