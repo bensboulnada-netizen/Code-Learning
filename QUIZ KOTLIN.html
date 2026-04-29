@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Kotlin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            font-size:22px;
+            font-family: Arial, sans-serif;
+            display:flex;
+            justify-content:center;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+        }
+        .container{
+            max-width:1000px;
+            background:white;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 3px 15px rgba(0,0,0,0.2);
+            margin:20px auto;
+        }
+        h2{
+            text-align:center;
+            font-size:32px;
+            margin-bottom:20px;
+        }
+        h3{
+            text-align:left;
+            font-size:24px;
+            margin-top:25px;
+        }
+        table{
+            width:100%;
+            font-size:20px;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+        table, th, td{
+            border:1.5px solid #333 !important;
+        }
+        th{
+            background:#f0f0f0;
+        }
+        th, td{
+            padding:12px;
+            text-align:center;
+        }
+        textarea{
+            width:100%;
+            height:120px;
+            font-size:18px;
+            padding:10px;
+            border:1px solid #ccc;
+            border-radius:6px;
+        }
+        .correct{
+            background:#c8f7c5 !important;
+        }
+        .wrong{
+            background:#f7c5c5 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Quiz KOTLIN</h2>
+
+        <h3>Exercice 1</h3>
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+            </tr>
+            <tr>
+                <td>Mot-clé variable constante ?</td>
+                <td><input type="radio" name="q1" value="0">var</td>
+                <td><input type="radio" name="q1" value="1">val</td>
+                <td><input type="radio" name="q1" value="2">let</td>
+                <td><input type="radio" name="q1" value="3">const</td>
+            </tr>
+            <tr>
+                <td>Fonction principale ?</td>
+                <td><input type="radio" name="q2" value="0">start()</td>
+                <td><input type="radio" name="q2" value="1">main()</td>
+                <td><input type="radio" name="q2" value="2">run()</td>
+                <td><input type="radio" name="q2" value="3">init()</td>
+            </tr>
+            <tr>
+                <td>Lire une ligne ?</td>
+                <td><input type="radio" name="q3" value="0">scan()</td>
+                <td><input type="radio" name="q3" value="1">input()</td>
+                <td><input type="radio" name="q3" value="2">readLine()</td>
+                <td><input type="radio" name="q3" value="3">read()</td>
+            </tr>
+            <tr>
+                <td>Commentaire une ligne ?</td>
+                <td><input type="radio" name="q4" value="0">#</td>
+                <td><input type="radio" name="q4" value="1">//</td>
+                <td><input type="radio" name="q4" value="2">--</td>
+                <td><input type="radio" name="q4" value="3">/* */</td>
+            </tr>
+            <tr>
+                <td>Afficher un message ?</td>
+                <td><input type="radio" name="q5" value="0">print()</td>
+                <td><input type="radio" name="q5" value="1">show()</td>
+                <td><input type="radio" name="q5" value="2">echo()</td>
+                <td><input type="radio" name="q5" value="3">msg()</td>
+            </tr>
+        </table>
+
+        <h3>Exercice 2</h3>
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>A</th>
+                <th>B</th>
+                <th>C</th>
+                <th>D</th>
+            </tr>
+            <tr>
+                <td>println("Bonjour")</td>
+                <td><input type="radio" name="q6" value="0">Erreur</td>
+                <td><input type="radio" name="q6" value="1">Affiche Bonjour</td>
+                <td><input type="radio" name="q6" value="2">Lit Bonjour</td>
+                <td><input type="radio" name="q6" value="3">Rien</td>
+            </tr>
+            <tr>
+                <td>5 + 3</td>
+                <td><input type="radio" name="q7" value="0">53</td>
+                <td><input type="radio" name="q7" value="1">8</td>
+                <td><input type="radio" name="q7" value="2">Erreur</td>
+                <td><input type="radio" name="q7" value="3">35</td>
+            </tr>
+        </table>
+
+        <h3>Exercice 3 (Pratique)</h3>
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>Réponse</th>
+            </tr>
+            <tr>
+                <td>Afficher la somme de 5 et 3</td>
+                <td><textarea id="q8"></textarea></td>
+            </tr>
+            <tr>
+                <td>Afficher les nombres de 0 à 2</td>
+                <td><textarea id="q9"></textarea></td>
+            </tr>
+        </table>
+
+        <button class="btn btn-dark w-100 mt-3" onclick="check()">Valider</button>
+        <h4 id="score" class="text-center mt-3"></h4>
+    </div>
+
+    <script>
+        function check(){
+            let score=0;
+            const answers={
+                q1:"1",
+                q2:"1",
+                q3:"2",
+                q4:"1",
+                q5:"0",
+                q6:"1",
+                q7:"1"
+            };
+
+            for(let q in answers){
+                let radios=document.getElementsByName(q);
+                radios.forEach(r=>{
+                    let td=r.parentElement;
+                    td.classList.remove("correct","wrong");
+                    if(r.checked){
+                        if(r.value===answers[q]){
+                            td.classList.add("correct");
+                            score++;
+                        }else{
+                            td.classList.add("wrong");
+                        }
+                    }
+                });
+            }
+
+            let q8=document.getElementById("q8").value.toLowerCase();
+            let q9=document.getElementById("q9").value.toLowerCase();
+
+            if(q8.includes("println") && q8.includes("5") && q8.includes("3")){
+                score++;
+                document.getElementById("q8").style.background="#c8f7c5";
+            }else{
+                document.getElementById("q8").style.background="#f7c5c5";
+            }
+
+            if(q9.includes("for") && q9.includes("0..2")){
+                score++;
+                document.getElementById("q9").style.background="#c8f7c5";
+            }else{
+                document.getElementById("q9").style.background="#f7c5c5";
+            }
+
+            document.getElementById("score").innerText =
+            "Score : " + score + " / 9";
+        }
+    </script>
+</body>
+</html>
