@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Learning</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        .demo {
+            overflow : hidden;
+            background-color : rgb(134, 133, 133);
+            padding: 10px 20px;
+            text-align: center;
+        }
+        .demo a {
+            float : left;
+            display : block;
+            color : rgb(245, 245, 220);
+            text-align : center;
+            padding : 10px 20px;
+            text-decoration : none;
+            font-weight: bold;
+            font-size: 30px;
+        }
+        @media screen and (max-width : 600px) {
+            .demo a {
+                float : none;
+                width : 100%
+            }
+        }
+        .ai{      /* غادي نطبّق عليه هاد الستايل chat-btn سميتوclass أي عنصر عندو */
+           position:fixed;   /*العنصر كيبقى لاصق فالشاشة حتى إلا طلعات ولا هبطات الصفحة، ما كيتحركش*/
+           bottom:20px;      /*كخلي العنصر من لتحت ديال الشاشة */
+           right:20px;      /*كخلي العنصر على اليمين ديال الشاشة */
+           color:white;    /*لون الإيموجي*/
+           font-size:10px;   /*حجم الإيموجي*/
+           border-radius:50%; /*حجم الإيموجي*/
+           text-decoration:none;  /*حجم الإيموجي*/
+           box-shadow:0 0 10px rgba(0,0,0,0.3); /*حجم الإيموجي*/
+           z-index:999;   /**/
+        }
+        .ai{
+            height: 110px;
+            width: 180px;
+        }
+        h4{
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        .row {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* المسافة بين التصاور */
+            margin-bottom: 20px;
+        }
+        .big-images img {
+            width: 350px;   /* العرض للكبار */
+            height: 350px;  /* الطول للكبار */
+            object-fit: cover; /* نفس الحجم لكل صورة */
+        }
+        .col text-center border p-4{
+            background: #e8e3e3;
+        }
+        .paragraphe{
+           display: flex;
+           align-items: center;  
+           gap: 20px;             
+           margin: 30px;
+        }
+        .python-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+        .paragraphe h4{
+            text-align: justify;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px){
+            .paragraphe{
+                flex-direction: column;
+                text-align: center;
+            }
+            .python-img{
+                width: 90%;
+            }
+            .welcom{
+                position: absolute;
+            }
+        }
+        .langues-img{
+            width: 355px;
+            flex-shrink: 0;   
+        }
+        .paragraphe h4{
+            text-align: justify;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px){
+            .paragraphe{
+                flex-direction: column;
+                text-align: center;
+            }
+            .langues-img{
+                width: 90%;
+            }
+        }
+        .java-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+         @media (max-width: 768px){
+            .java-img{
+                width: 90%;
+            }
+        }
+        .paragraphe2{
+           display: flex;
+           align-items: center;  
+           gap: 20px;             
+           margin: 30px;
+        }
+        .php-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+        .paragraphe2 h4{
+            text-align: justify;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px){
+            .paragraphe2{
+                flex-direction: column;
+                text-align: center;
+            }
+            .php-img{
+                width: 90%;
+            }
+            .html-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+        }
+        .html-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+        .paragraphe3{
+           display: flex;
+           align-items: center;  
+           gap: 20px;             
+           margin: 30px;
+        }
+        .c-img{
+            width: 350px;
+            flex-shrink: 0;        
+        }
+        .paragraphe3 h4{
+            text-align: justify;
+            line-height: 1.6;
+        }
+        @media (max-width: 768px){
+            .paragraphe3{
+                flex-direction: column;
+                text-align: center;
+            }
+            .c-img{
+                width: 90%;
+            }
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+        }
+        .p {
+            font-style: initial;
+            font-size: 26px;
+        }
+        h2, h3 {
+            font-size: 30px;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class = "demo">
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba2.html">🏠Acceuil</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba3.html">🐍Python</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba4.html">☕Java script</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba5.html">📓Php</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba6.html">🗃️Html</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba7.html">⚙️C+</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="hiba8.html">🔍POO</a></a>
+        <a href = "#" class="btn btn-outlin-dark" type="button"><a class="btn btn-outlin-dark" href="memory games.html">🧠Memory Games</a></a>
+    </div>
+    <div class="container mt-4">
+        <h2>📚 Plateforme de Développement Digital</h2>
+        <p class="p">
+            Ce site est destiné aux étudiants de 1ère et 2ème année en développement digital.
+            Il contient des modules importants pour apprendre la programmation et créer des projets réels.
+        </p>
+    </div>
+    <div class="container mt-4 mb-5">
+        <h3>🚀 Commencez maintenant</h3>
+        <p class="p">
+            Choisissez un module dans le menu et commencez votre apprentissage 👆
+        </p>
+    </div>
+    <a href="ai.html"><img src="ai.jpg" class="ai" alt=""></a>  
+    <div class="paragraphe">
+    <img src="langues.jpg" class="langues-img" alt="">
+        <h4>
+            Un langage de programmation est un moyen par lequel les humains
+            communiquent avec les ordinateurs pour leur donner des instructions
+            précises. Les programmes écrits dans ces langages permettent de créer
+            des logiciels, des applications, des sites web, des jeux, et même des
+            systèmes complexes comme l’intelligence artificielle ou les systèmes
+            embarqués.
+            les Types de langages:Langages de bas niveau : proches de la machine
+            (ex : assembleur).Langages de haut niveau : plus proches du langage
+            humain (ex : Python, Java).
+        </h4>
+        <img src="image de Python 2.jpeg" class="python-img" alt="">
+        <h4>Python est un langage de programmation simple et puissant.Il est utilisé dans plusieurs domaines :
+            Développement web 🌐,
+            Intelligence artificielle 🤖,
+            Analyse de données 📊.
+            Automatisation de tâches:Code clair et facile à lire\
+            Peu de lignes pour faire beaucoup de choses\
+            Beaucoup de bibliothèques prêtes à l’emploi\
+            Fonctionne sur Windows, Linux et Mac. 
+        </h4>
+    </div> 
+    <div class="paragraphe2">
+        <img src="image de php 4.jpeg" class="php-img" alt="">
+        <h4>
+            PHP est un langage de programmation côté serveur, principalement
+            utilisé pour le développement web.Il permet de créer des sites web
+            dynamiques,comme les systèmes de connexion, les formulaires et
+            la gestion des bases de données.PHP est facile à apprendre, open
+            source et très utilisé pour développer des applications web interactives.
+            Automatisation de tâches : Envoyer des emails aux utilisateurs automatiquement\
+            Générer des rapports réguliers depuis une base de données\ Planifier des
+            tâches avec un cron job sur un serveur.
+        </h4>
+        <img src="photo de java script.jpeg" class="java-img" alt="">
+        <h4>
+            JavaScript est un langage de programmation très utilisé dans
+            le développement web. Il permet de rendre les pages web dynamiques
+            et interactives, comme les menus animés,les formulaires intelligents
+            et les mises à jour en temps réel. Créé pour fonctionner directement
+            dans le navigateur,JavaScript est aujourd’hui indispensable
+            pour construire des sites et des applications modernes.
+            Automatisation de taches:Envoyer des emails aux utilisateurs
+            automatiquement\ Générer des rapports réguliers depuis une base de
+            données\ Planifier des tâches avec un cron job sur un serveur.
+        </h4>
+    </div>
+    <div class="paragraphe3">
+        <img src="image de c+.jpeg" class="c-img" alt="">
+        <h4>
+            C++ est un langage de programmation puissant et polyvalent, créé par Bjarne
+            Stroustrup en 1983. Il est basé sur le langage C mais ajoute des
+            fonctionnalités orientées objet, ce qui permet de créer des programmes
+            modulaires et réutilisables. C++ est utilisé dans :
+            Les logiciels systèmes (OS, pilotes)\ Les jeux vidéo\Les applications
+            graphiques\ Les applications financières et scientifiques.
+        </h4>
+        <img src="image de css et de html.jpeg" class="html-img" alt="">
+        <h4>
+            HTML (HyperText Markup Language) est le langage de base du web.
+            Il sert à structurer et organiser le contenu d’une page web,
+            comme les titres, paragraphes, images, liens ou tableaux. HTML ne permet
+            pas de créer de la logique ou d’automatiser des actions ; il est utilisé
+            avec CSS pour le design et JavaScript pour l’interactivité. 
+        </h4>
+    </div>
+    <!--footer -->
+    <div style="background: #000;">
+        <div class="row" style="color: aliceblue;">
+            <div class="col text-center border p-4">
+                <h5>informatique-Développement Digital</h5>
+                <h5>©2026 info</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
